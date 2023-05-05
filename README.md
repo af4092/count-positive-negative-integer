@@ -13,3 +13,32 @@ Then we can check the created *.jar file:
 
 ![image](https://user-images.githubusercontent.com/24220136/228429057-64672fe0-4ac8-4560-9005-46c12243d559.png)
 
+### IMPORTANT
+
+When we try to run jar file usually we get the following error message in case of not setting the manifest file in `pom.xml` file in `maven` project:
+
+```
+$ java -jar TestMaven-1.0-SNAPSHOT.jar
+no main manifest attribute, in TestMaven-1.0-SNAPSHOT.jar
+```
+
+Solution is to update the `pom.xml` file to include the main class in the manifest file as following:
+
+```
+   <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.2.0</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>org.example.Main</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+```
